@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% include "others/head.html" %}
+
+<body>
+    {% include "module/header.html" %}
+
+    <main class="main">
+        <section class="section-box-2">
+            <div class="container">
+                <div class="banner-hero banner-company">
+                    <div class="block-banner text-center">
+                        <h3 class="wow animate__animated animate__fadeInUp">Browse Candidates</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-box mt-30">
+            <div class="container">
+                <div class="content-page">
+                    <div class="row">
+                        {% for student in students %}
+
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="card-grid-2 hover-up">
+                                <div class="card-grid-2-image-left">
+                                    <div class="card-grid-2-image-rd online"><a href="/details/{{student.id}}">
+                                            <figure><img src="{{student.profileUrl}}">
+                                            </figure>
+                                        </a></div>
+                                    <div class="card-profile pt-10"><a href="/details/{{student.id}}">
+                                            <h5 class="">{{student}}</h5>
+                                        </a><span class="font-xs color-text-mutted">{{student.year}}th Year
+                                            {{student.department}}'{{student.batch}}</span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+    </main>
+    {% include "others/foot.html" %}
+</body>
+
+</html>

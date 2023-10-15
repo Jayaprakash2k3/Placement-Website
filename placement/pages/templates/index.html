@@ -2,8 +2,121 @@
 <!DOCTYPE html>
 <html lang="en">
 {% include "others/head.html" %}
-  <body>
-   {% include "module/header.html" %}
-   {% include "others/foot.html" %}
-  </body>
+
+<body>
+  {% include "module/header.html" %}
+  {% if user %}
+  <div class="bg-homepage4"></div>
+  <section class="section-box">
+    <div class="banner-hero hero-1 banner-homepage4">
+      <div class="banner-inner">
+        <div class="row">
+          <div class="col-xl-7 col-lg-12">
+            <div class="block-banner">
+              <h1 class="heading-banner wow animate__animated animate__fadeInUp">Welcome <span
+                  class="color-brand-2">{{user}}</span><br class="d-none d-lg-block">How you doing?</h1>
+              <div class="banner-description mt-20 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
+                GCT's Placement Cell embarks on a quest to bridge the realm of your dreams with the path to a promising
+                career, <br class="d-none d-lg-block">forging
+                connections that light up your professional journey.</div>
+            </div>
+          </div>
+          <div class="col-xl-5 col-lg-12 d-none d-md-block col-md-6">
+            <div class="banner-imgs">
+              <div class="block-1 shape-1"><img class="img-responsive" alt="jobBox"
+                  src="{% static 'assets/imgs/page/homepage4/banner.png' %}"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% else %}
+  <div class="bg-homepage4"></div>
+  <section class="section-box">
+    <div class="banner-hero hero-1 banner-homepage4">
+      <div class="banner-inner">
+        <div class="row">
+          <div class="col-xl-7 col-lg-12">
+            <div class="block-banner">
+              <h1 class="heading-banner wow animate__animated animate__fadeInUp">Welcome <span
+                  class="color-brand-2">GCTian</span><br class="d-none d-lg-block">How you doing?</h1>
+              <div class="banner-description mt-20 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
+                GCT's Placement Cell embarks on a quest to bridge the realm of your dreams with the path to a promising
+                career, <br class="d-none d-lg-block">forging
+                connections that light up your professional journey.</div>
+            </div>
+          </div>
+          <div class="col-xl-5 col-lg-12 d-none d-xl-block col-md-6">
+            <div class="banner-imgs">
+              <div class="block-1 shape-1"><img class="img-responsive" alt="jobBox"
+                  src="{% static 'assets/imgs/page/homepage4/banner.png' %}"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="section-box mt-50">
+    <div class="container p-5">
+      <div class="text-center">
+        <h2 class="section-title mb-10 wow animate__ animate__fadeInUp animated"
+          style="visibility: visible; animation-name: fadeInUp;">Explore</h2>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 mb-15 mb-lg-0">
+          <div class="box-radius-8 bg-urgent hover-up">
+            <div class="image">
+              <figure><img src="{% static 'assets/imgs/page/homepage2/job-tools.png' %}"></figure>
+            </div>
+            <div class="text-info">
+              <h3>Edit your Profile</h3>
+              <p class="font-sm color-text-paragraph-2">Craft your profile as per the need of the company and perform
+                autofill</p>
+              <div class="mt-15"><a class="btn btn-arrow-right" href="/profile/">Edit Now</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div class="box-radius-8 bg-9 hover-up">
+            <div class="image">
+              <figure><img src="{% static 'assets/imgs/page/homepage2/planning-job.png' %}"></figure>
+            </div>
+            <div class="text-info">
+              <h3>Friends Database</h3>
+              <p class="font-sm color-text-paragraph-2">Explore your friends profile keep your classmate contact in your
+                finger tip</p>
+              <div class="mt-15"><a class="btn btn-arrow-right" href="/students/">Explore</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-box mt-50 mb-20">
+    <div class="container">
+      <div class="box-newsletter">
+        <div class="row">
+          <div class="col-xl-3 col-12 text-center d-none d-xl-block"><img src="" alt=""></div>
+          <div class="col-lg-12 col-xl-6 col-12">
+            <h2 class="text-md-newsletter text-center">New Things Will Always<br> Update Regularly</h2>
+            <div class="box-form-newsletter mt-40">
+              <form class="form-newsletter">
+                <input class="input-newsletter" type="text" value="" placeholder="Enter your email here">
+                <button class="btn btn-default font-heading icon-send-letter">Subscribe</button>
+              </form>
+            </div>
+          </div>
+          <div class="col-xl-3 col-12 text-center d-none d-xl-block"><img src="" alt=""></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% include "others/foot.html" %}
+</body>
+
 </html>

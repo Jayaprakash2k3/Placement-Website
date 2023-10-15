@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 class Department(models.Model):
     name = models.CharField(max_length=100, unique=True)
     def __str__(self):
@@ -17,18 +18,34 @@ class Company(models.Model):
         return self.CompanyName
 
 class Student(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=15)
-    address = models.TextField()
-    date_of_birth = models.DateField()
-    resume = models.FileField(upload_to='resumes/')
-    education = models.TextField()
-    skills = models.TextField()
-    work_experience = models.TextField()
-    references = models.TextField(blank=True, null=True)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    #Basic Details
+    gender = models.CharField(max_length=10,null=True)
+    city = models.CharField(max_length=50, null=True)
+    aadhar=models.CharField(max_length=50, null=True)
+    gctmail = models.CharField(max_length=50, null=True)
+    first_name = models.CharField(max_length=50, null=True)
+    last_name = models.CharField(max_length=50, null=True)
+    email = models.EmailField(unique=True, null=True)
+    phone_number = models.CharField(max_length=15, null=True)
+    address = models.TextField(null=True)
+    date_of_birth = models.DateField(null=True)
+    
+    #Education
+    batch = models.IntegerField(null=True)
+    rollnum=models.CharField(max_length=50, null=True)
+    year = models.IntegerField(null=True)
+    SSLC = models.FloatField(null=True)
+    HSC = models.FloatField(null=True)
+    isLatral = models.BooleanField(default=False)
+    cgpa = models.FloatField(null=True)
+    resume = models.CharField(max_length=200, null=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE,null=True)
 
+
+    # Others
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    profileUrl = models.CharField(max_length=200,default="https://cdn-icons-png.flaticon.com/512/1999/1999625.png")
+    bannerUrl = models.CharField(max_length=200,default="https://u-static.fotor.com/images/text-to-image/result/PRO-31d0bb5520b84354b1a2f395521b6a20.jpg")
+    
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
