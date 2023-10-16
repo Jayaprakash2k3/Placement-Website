@@ -33,7 +33,9 @@
                                             <h5 class="">{{student}}</h5>
                                         </a><span class="font-xs color-text-mutted">{{student.year}}th Year
                                             {{student.department}}'{{student.batch}}</span>
-
+                                            {% if student.isPlaced %}
+                                            <button class="btn btn-primary" >Placed</a>
+                                            {% endif %}
                                     </div>
                                 </div>
 

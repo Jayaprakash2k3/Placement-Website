@@ -13,7 +13,10 @@ urlpatterns = [
     path("loginauth",views.auth),
     path("students/", views.listStudent, name="Student"),
     path('details/<int:id>', views.student_profile, name='student_profile'),
-
+    path('company/<int:id>', views.company_profile, name='Company_profile'),
+    path('apply/<int:cid>',views.applicationLink,name='Application'),
+    path('withdraw/<int:cid>',views.withdraw,name='Withdraw'),
+    path('download/<int:cid>',views.downloadPage,name='DownloadPage')
 
 
 ]

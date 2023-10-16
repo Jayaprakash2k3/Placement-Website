@@ -31,16 +31,16 @@
                 {% for company in companies %}
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                   <div class="card-grid-1 hover-up wow animate__animated animate__fadeIn">
-                    <div class="image-box"><a href="/company/{{company.CompanyName}}"><img src="{{company.logo}}"
+                    <div class="image-box"><a href="/company/{{company.id}}"><img src="{{company.logo}}"
                           alt=""></a></div>
                     <div class="info-text mt-10">
-                      <h5 class="font-bold"><a href="/company/{{company.CompanyName}}">{{company.CompanyName}}</a></h5>
-                      <h6 class="font-sm"><a href="/company/{{company.CompanyName}}">{{company.description}}</a></h6>
+                      <h5 class="font-bold"><a href="/company/{{company.id}}">{{company.CompanyName}}</a></h5>
+                      <h6 class="font-sm"><a href="/company/{{company.id}}">{{company.description}}</a></h6>
                       <div class="mt-5"><span class="card-briefcase">Fulltime</span><span
                           class="card-time"><span>{{company.DeadLine}}</span></span></div>
 
                       <div class="mt-30"><a class="btn btn-primary btn-big"
-                          href="/company/{{company.CompanyName}}"><span>Apply Now</span></a></div>
+                          href="/company/{{company.id}}"><span>Apply Now</span></a></div>
                     </div>
                   </div>
                 </div>

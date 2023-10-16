@@ -5,7 +5,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-
+from django.utils import timezone
+import csv
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
@@ -117,3 +118,46 @@ def student_profile(request, id):
     print(formatted_date)
     return render(request,'OtherProfile.html',{"user":student,"tab":"profile","dob":formatted_date})
 
+def company_profile(request, id):
+    company = Company.objects.get(id=id)
+    student = Student.objects.get(user=request.user)
+    applications = Application.objects.filter(company=company)
+    eli={"minCGPA":student.cgpa>=company.MinCGPA,"minSSLC":student.SSLC>=company.MinSSLC,"minHSC":student.HSC>=company.MinHSC,"dualPlace":((not student.isPlaced) or company.dualPlacement),"deadline":company.DeadLine>timezone.now()}
+    applied = len(Application.objects.filter(student=student,company=company))!=0
+    print(eli)
+    return render(request,'companyProfile.html',{"company":company,"students":applications,"applied":applied,"eligible":eli})
+
+def applicationLink(request,cid):
+    student = Student.objects.get(user=request.user)
+    company = Company.objects.get(id=cid)
+    x=Application.objects.filter(student=student,company=company)
+    if(x):
+        return redirect('/company/'+str(cid))
+    else:
+        application = Application.objects.create(student=student, company=company)
+        return redirect('/company/'+str(cid))
+
+def withdraw(request,cid):
+    student = Student.objects.get(user=request.user)
+    company = Company.objects.get(id=cid)
+    x=Application.objects.get(student=student,company=company)
+    x.delete()
+    return redirect('/company/'+str(cid))
+
+def downloadPage(request,cid):
+    student = Student.objects.get(user=request.user)
+    company = Company.objects.get(id=cid)
+    application = Application.objects.filter(company=company)
+    if student.isPR:
+            response = HttpResponse(content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename="'+company.CompanyName+' DB.csv"'
+            writer = csv.writer(response)
+            x=0
+            writer.writerow(['SlNo.',"Roll Number",'Name', 'First Name', 'Last Name','Gender','Department','GCT Mail','Personal Mail','Phone Number',"CGPA","SSLC","HSC","DOB","Address","City","Resume"])
+            for row in application:
+                writer.writerow([x,row.student.rollnum,row.student, row.student.first_name, row.student.last_name,row.student.gender,row.student.department,row.student.gctmail,row.student.email,row.student.phone_number,row.student.cgpa,row.student.SSLC,row.student.HSC,row.student.date_of_birth,row.student.address,row.student.city,row.student.resume])
+                x+=1
+            return response
+        # return render(request,'download.html')
+    else:
+        return redirect('/company/'+str(cid))
